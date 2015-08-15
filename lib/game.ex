@@ -1,7 +1,6 @@
 defmodule Game do
   defstruct tiles: Enum.into(1..12, HashSet.new), state: :ok, score: nil
 
-            
   @spec decompose(integer) :: [{integer, integer}]
   @doc """
   Decompose an integer n into pairs of integer a, b such that a + b = n
@@ -55,3 +54,16 @@ defmodule Game do
   end
 end
 
+defimpl Inspect, for: Game do
+  def inspect(dict, opts) do
+    tiles = Enum.join(for tile <- 1..12 do
+      if Set.member?(dict.tiles, tile) do
+        Integer.to_string(tile)
+      else
+        "_"
+      end
+    end, ",")
+    
+    "%Game{tiles: #{tiles}, state: #{dict.state}, score: #{dict.score}}"
+  end
+end

@@ -1,5 +1,5 @@
 defmodule Game do
-  defstruct tiles: Enum.into(1..12, HashSet.new), state: :ok
+  defstruct tiles: Enum.into(1..12, HashSet.new), state: :ok, score: nil
 
             
   @spec decompose(integer) :: [{integer, integer}]
@@ -44,6 +44,14 @@ defmodule Game do
   """
   def possible_plays(game, n) do
     decompose(n) |> Enum.filter(&(can_fold?(game, &1)))
+  end
+
+  @spec finish(%Game{}) :: %Game{}
+  @doc """
+  Finish a game. Change the state to ended and calculate the score.
+  """
+  def finish(game) do
+    %{game | state: :ended, score: Enum.sum(game.tiles)}
   end
 end
 

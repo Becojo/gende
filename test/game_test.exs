@@ -26,7 +26,7 @@ defmodule GameTest do
     end
   end
 
-  test "fold_tiles" do
+  test "fold_tiles should be removed for the tile set" do
     for i <- 1..12 do
       for j <- 1..12 do
         game = Game.fold_tiles(%Game{}, {i, j})

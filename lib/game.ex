@@ -15,8 +15,12 @@ defmodule Game do
   end
 
   @spec fold_tiles(%Game{}, {integer, integer}) :: %Game{}
-  def fold_tiles(game, {a, b}) do
-    %{game | tiles: game.tiles |> Set.delete(a) |> Set.delete(b)}
+  def fold_tiles(game, {a, b} = play) do
+    if can_fold?(game, play) do
+      %{game | tiles: game.tiles |> Set.delete(a) |> Set.delete(b)}
+    else
+      game
+    end
   end
 
   @spec rand() :: integer

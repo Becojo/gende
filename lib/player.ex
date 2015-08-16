@@ -15,7 +15,7 @@ defmodule Player do
     play(game, player)
   end
 
-  def play(%{state: :ended} = game, player) do
+  def play(%{state: :ended} = game, _) do
     game
   end
 end

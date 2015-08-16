@@ -59,7 +59,7 @@ defmodule Game do
 end
 
 defimpl Inspect, for: Game do
-  def inspect(dict, opts) do
+  def inspect(dict, _) do
     tiles = Enum.join(for tile <- 1..12 do
       if Set.member?(dict.tiles, tile) do
         Integer.to_string(tile)
